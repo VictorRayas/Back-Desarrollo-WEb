@@ -27,6 +27,50 @@ public class ControllerLibro {
                 HttpStatus.OK
         );
     }
+    @GetMapping("/name/{name}")
+    ResponseEntity<Response<List<Libros>>> getByName(@PathVariable String name){
+        return new ResponseEntity<>(
+                this.serviceLibro.getName(name),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("/autor/{autor}")
+    ResponseEntity<Response<List<Libros>>> getByAutor(@PathVariable String autor){
+        return new ResponseEntity<>(
+                this.serviceLibro.getAutor(autor),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("/genero/{id}")
+    ResponseEntity<Response<List<Libros>>> getbyGenero(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.serviceLibro.getGenero(id),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("/pack/{nombre}/{autor}")
+    ResponseEntity<Response<List<Libros>>> getbyGenero(@PathVariable String nombre,@PathVariable String autor){
+        return new ResponseEntity<>(
+                this.serviceLibro.getNombreAutor(nombre,autor),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("/anio/{inicio}/{fin}")
+    ResponseEntity<Response<List<Libros>>> getbyAnio(@PathVariable Long inicio, @PathVariable Long fin){
+        return new ResponseEntity<>(
+                this.serviceLibro.getAnio(inicio,fin),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("/anio/desc/")
+    ResponseEntity<Response<List<Libros>>> getbyAnio(){
+        return new ResponseEntity<>(
+                this.serviceLibro.getFechaDesc(),
+                HttpStatus.OK
+        );
+    }
+
+
     @PostMapping("/")
     public  ResponseEntity<Response<Libros>> insert(@Valid @RequestBody DtoLibro libros,
                                                     @Valid BindingResult result){

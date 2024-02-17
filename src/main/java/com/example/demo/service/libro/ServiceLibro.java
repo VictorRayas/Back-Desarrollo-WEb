@@ -35,6 +35,60 @@ public class ServiceLibro {
 
        );
    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getName(String name){
+        return new Response<>(
+                this.repositoryLibro.findByNombreContaining(name),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getAutor(String autor){
+        return new Response<>(
+                this.repositoryLibro.findByAutorContaining(autor),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getGenero(Long id){
+        return new Response<>(
+                this.repositoryLibro.findAByGenero_Id(id),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getAnio(Long inicio, Long fin){
+        return new Response<>(
+                this.repositoryLibro.findByAnioBetween(inicio,fin),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getNombreAutor(String  nombre, String autor){
+        return new Response<>(
+                this.repositoryLibro.findByNombreContainingAndAutorContaining(nombre,autor),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Libros>> getFechaDesc(){
+        return new Response<>(
+                this.repositoryLibro.findByOrderByAnioDesc(),
+                false,
+                200,
+                "Libro Encontrado"
+        );
+    }
 
    @Transactional(rollbackFor = SQLException.class)
     public Response<Libros> insert(Libros libro){
